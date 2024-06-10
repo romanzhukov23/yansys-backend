@@ -3,15 +3,18 @@ services:
   mongo:
     image: mongo
     environment:
-      - MONGO_INITDB_DATABASE=coursework
+      - MONGO_INITDB_DATABASE=aggregator
     ports:
       - "28017:27017"
-  postgres:
-    image: postgres:alpine
-    environment:
-      - POSTGRES_PASSWORD=docker
-      - POSTGRES_USER=docker
-    ports:
-      - "54321:5432"
     volumes:
-      - ./tools/docker-entrypoint-postgres-initdb.d:/docker-entrypoint-initdb.d
+      - mongo:/data/db
+#  postgres:
+#    image: postgres:alpine
+#    environment:
+#      - POSTGRES_PASSWORD=docker
+#      - POSTGRES_USER=docker
+#    ports:
+#      - "54321:5432"
+
+volumes:
+  mongo:
